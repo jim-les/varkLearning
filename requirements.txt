@@ -1,1 +1,6 @@
-flask
+Flask
+Flask-Login
+SQLAlchemy
+pandas
+scipy
+MySQL-python
