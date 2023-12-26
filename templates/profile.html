@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Your App{% endblock %}
+
+{% block content %}
+
+<style>
+    .profile-pic{
+        color: darkblue;
+        font-size: 200px;
+    }
+
+    .card_topsis{
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: aliceblue;
+        width: 100%;
+        height: 0;
+        overflow: scroll;
+        transition: 1.5s;
+        max-width: 1000px;
+        
+    }
+    .permonance td, .permonance th{
+        font-size: 8px;
+    }
+
+    
+</style>
+
+    <h1 class="text-center">User Profile</h1>
+    <div class="profile_layout d-flex justify-content-center">
+        <div class="profile-pic fa fa-user-circle">
+
+    </div>
+        
+    </div>
+
+    <div >
+        <p class="text-center"><strong>Username:</strong> {{ user.name }}</p>
+        <p class="text-center"><strong>Email:</strong> {{ user.email }}</p>
+        <p class="text-center"><strong>Student ID:</strong> {{ user.student_id }}</p>
+        <p class="text-center"><strong>Major:</strong> {{ user.major }}</p>
+        <p class="text-center"><strong>Gender:</strong> {{ user.gender }}</p>
+        <p class="text-center"><strong>Age:</strong> {{ user.age }}</p>
+        <p class="text-center"><strong>Dominant VARK Learning Style:</strong> {{ dominant_vark }}</p>
+        <div style="background-color: darkblue; width: 100%; color: white; padding: 10px 5px">VARK Recommendation</div> 
+        <p class="px-2"> {{vark_recommendation}}</p>
+        <ul>
+            <li>
+                {{vark_material_recommendation}}
+            </li>
+        </ul>
+
+        <!-- <div style="background-color: darkblue; width: 100%; color: white; padding: 10px 5px">TOPSIS Recommendation</div> 
+        <p class="px-2"> {{topsis_recommendation}}</p>
+        
+        <ul>
+            <li>
+                
+            </li>
+        </ul> -->
+
+        <div style="background-color: darkblue; width: 100%; color: white; padding: 10px 5px">TOPSIS RANKING</div> 
+        <ul class="list-group pd">
+            {% if ranked_vark is defined and ranked_vark|length > 0 %}
+            {% set vark_mapping = {"V": "Visual", "A": "Audio", "R": "Read/Write", "K": "Kinesthetic"} %}
+            
+            {% set displayed_categories = [] %}
+        
+            {% for topsis in ranked_vark %}
+                {% set category_name = vark_mapping.get(topsis) %}
+                {% set displayed_categories = displayed_categories + [topsis] %}
+        
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ topsis }} - {{ category_name }}
+                    <span class="badge badge-primary badge-pill">{{ loop.index }}</span>
+                </li>
+            {% endfor %}
+        
+            
+        {% endif %}
+
+
+        </ul>
+        
+        <div  style="overflow-x: scroll;" class="permonance">
+            <div  style="background-color: darkblue; width: 100%; color: white; padding: 10px 5px">performance_scores</div> 
+        
+
+            {% if performance_scores != None %}
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>QUESTION</th>
+                    <th>VARK SCORE</th>
+                    <th>Knowledge gap score </th>
+                    <th>Time Spent</th>
+                </tr>
+            </thead>
+            
+            {% for data in performance_scores %}
+            <tr>
+                <td>Question {{ loop.index }}</td>
+                <td>{{ data[0] * 100 }}%</td>
+                <td>{{ data[1]|float|round(4) * 100 }}% </td>
+                <td>{{ data[2]|float|round(2) * 5 }}sec</td>   
+            </tr>
+            {% endfor %}
+
+            <tbody>
+                
+            </tbody>
+
+        </table>
+   
+        <a href="{{url_for('vark_questionnaire', question_number=1)}}" class="btn my-5 text-center" style="background-color: darkblue; box-shadow: 5px 5px 5px 5px gray; color: white;">Re-Take Test</a>
+
+        {% else %}
+            <p>
+                <strong>performance_scores:</strong>{{performance_scores}} 
+                <BR></BR>
+                <a href="{{url_for('vark_questionnaire', question_number=1)}}" class="btn my-5 text-center" style="background-color: darkblue; box-shadow: 5px 5px 5px 5px gray; color: white;">Take Test</a>
+            </p>
+
+
+        {% endif %}
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <button class="btn ViewTopsis text-center align-center" style="background-color: var(--primary-color); box-shadow: 5px 5px 5px 5px gray;">View TOPSIS Report</button>
+        </div>
+        <br>
+
+    </div>
+
+    <div class="card_topsis">
+
+        <h2 class="text-center p-3">TOPSIS Ranking</h2>
+
+        <div class="exitTopsis position-absolute" style="top: 1%; left: 90%; font-size: 40px;">&times;</div>
+        <table border="1" class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>TOPSIS Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question, topsis_rank in questions_ranks %}
+                    <tr>
+                        <td>{{ question.question_text }}</td>
+                        <td>{{ topsis_rank }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <!-- <button class="btn px-5 my-4" style="background-color: darkblue; color: white;">Download</button> -->
+            <br>
+        </div>
+    </div>
+    
+<script>
+    document.querySelector(".ViewTopsis").addEventListener("click", function(){
+        var card_topsis = document.querySelector(".card_topsis");
+        card_topsis.style.height = "100vh"
+    })
+
+    document.querySelector(".exitTopsis").addEventListener("click", function(){
+        var card_topsis = document.querySelector(".card_topsis");
+        card_topsis.style.height = "0"
+    })
+</script>
+
+{% endblock %}

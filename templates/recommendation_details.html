@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Your App{% endblock %}
+
+{% block content %}
+
+<style>
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00bfff; /* Light Blue */
+    }
+
+    .card-text {
+        color: #ddd; /* Light Gray */
+    }
+
+    .btn-primary {
+        background-color: #ff4500; /* Orange Red */
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff6347; /* Tomato */
+    }
+</style>
+
+<div class="container">
+    <h2 class="my-4">Recommended Materials</h2>
+
+    <div class="row">
+        {% for recommendation in recommendations %}
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-light">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recommendation.title }}</h5>
+                        <p class="card-text">{{ recommendation.description }}</p>
+                        <a href="{{ url_for('recommendation_details', recommendation_id=recommendation.id) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Your App{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VARK Questionnaire</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <!-- When learning a new skill, do you prefer:\nV) Watching someone demonstrate it\nA) Listening to instructions or explanations\nR) Reading about it\nK) Trying it out yourself", -->
+    <div class="questionnaeContainer">
+        <div class="container py-3">
+
+            <h4 class="text-center text-succes py-5">VARK Questionnaire</h4>
+            
+            {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li style="color: {% if 'danger' in message %}red{% else %}green{% endif %}; text-align: center; list-style: none;">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+
+            <div class="number_of_question">
+                <p>{{question_number}}</p> / <p>{{T_num_Q}}</p>
+            </div>
+            
+            <form method="post" action="{{ url_for('vark_questionnaire', question_number=question_number) }}">
+                
+                {% if question_number > 1 %}
+                    <input type="submit" name="action" value="back" class="fa fa fa-angle-left backButton">
+                {% endif %}
+
+                <!-- Hidden input to store the current question number -->
+                <input type="hidden" name="question_number" value="{{ question_number }}">
+                
+                <div class="questionDiv">
+                    <h2 class="question">{{question_number}}.  {{ question }}</h2>
+                </div>
+
+                <div class="options" >
+                    {% for option in options %}
+                        <div class="option" onclick="selectRadio('{{ option.id }}')">
+                            <p id="{{ option.id }}">{{ option.option_id }}</p>
+                            <input type="radio" name="answer_option_id" id="radio_{{ option.id }}" value="{{ option.option_id }}" style="display: none;">
+                            <p class="choice_content" id = "content_{{ option.id }}">{{ option.content }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="nextButton">
+                    <button type="submit" name="action" class="btn nextBtn" value="next">Next <i class="fa fa fa-angle-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        function selectRadio(optionId) {
+            // Uncheck all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+                radio.checked = false;
+                
+            });
+            document.querySelectorAll(".choice_content").forEach(function(p){
+                p.style.backgroundColor="white";
+
+            })
+
+            // Check the radio button corresponding to the clicked option
+            var radioId = 'radio_' + optionId;
+            document.getElementById(radioId).checked = true;
+
+            var contentClicked = "content_" + optionId;
+            document.getElementById(contentClicked).style.backgroundColor="aqua";
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

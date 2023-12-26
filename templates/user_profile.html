@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Your App{% endblock %}
+
+{% block content %}
+
+<style>
+    .Screen_profile_view_container{
+        display: flex;
+        gap: 50px;
+    }
+    .edit-profile-pic-btn{
+        position: absolute;
+        top: 10%;
+        right: 10%;
+    }
+</style>
+<div class="container" >
+    <!-- Display success messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="Screen_profile_view_container">
+        <div >
+            
+             <div class="card my-2">
+                 <div class="card-body text-center" style="width: 250px; height: 200px; position: relative;">
+                     <!-- <img src="" alt="" class="user_profile_pic"> -->
+                     <i class="fa fa-bars edit-profile-pic-btn"></i>
+                     <i class="fa fa-user-circle my-3" style="font-size: 100px; color: black;"></i>
+                     <p class="user_name"><i>{{user.name}}</i></p>
+                 </div>
+             </div>
+
+             <div class="card" >
+                 <div class="card-body p-o text-center" style="height: 60px">
+                    <a href="{{ url_for ('user_profile') }}" class="text-center">My Account</a>
+                 </div>
+             </div>
+        </div>
+
+        <!-- second col -->
+
+        <div class="profile_col_2">
+
+            <!-- ############################## -->
+            <div style="display: flex; gap: 60px;" class="py-4">
+                <div>
+                    <h2>My Account</h2>
+                    <p style="font-size: 12px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                        View and edit your personal Info below
+                    </p>
+                </div>
+                <!-- ############### -->
+
+                <div>
+                    <button class="brn px-4 py-1">Discard</button>
+                    <button class="brn px-4 py-1 bg-dark text-light">Update Info</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- ################################ -->
+            <div>
+                <h5>Account</h5>
+                <p>Update your personal Info</p>
+
+                <br>
+
+                <h5>Login Email: </h5>
+                <p>{{user.email}}</p>
+
+                <br>
+                
+                <form action="{{ url_for('update_profile') }}" method="post">
+
+                    <div style="display: flex; justify-content: space-between;">
+                    
+                        <div>
+                            <label for="fname">First Name</label> <br>
+                            <input type="text"name=fname value="{{ user.name.split()[0] }}">
+                        </div>
+    
+                        <div>
+                            <label for="fname"  value="{{ user.name.split()[1] }}">Last Name</label> <br>
+                            <input type="text" name="lname">
+                        </div>
+                    </div>
+
+                    <div class="my-4">
+                        <label for="phone">Phone</label> <br>
+                        <input type="text" name="phone">
+                    </div>
+
+                    <div style="display: flex; justify-content: right;">
+                        <div>
+                            <button class="brn px-4 py-1">Discard</button>
+                            <button class="brn px-4 py-1 bg-dark text-light" type="submit">Update Info</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

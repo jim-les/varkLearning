@@ -1,0 +1,385 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your App{% endblock %}</title>
+    
+    <!-- Bootstrap CSS (Add the appropriate CDN link or include Bootstrap locally) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Your custom CSS styles -->
+    <style>
+        :root{
+            --primary-color:  rgb(30, 241, 241);
+            --secondary-color: yellow;
+            --colot-text: rgb(83, 83, 83);
+            --bg-border: rgb(179, 175, 175);
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            margin-bottom: 20px; /* Adjust the margin as needed */
+        }
+
+                
+        .top_container {
+            box-shadow: 10px 10px 10px 10px gray;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: white; /* Add background color for header */
+        }
+
+        .app_top_nav{
+            display: flex;align-items: center; justify-content: space-between; padding: 20px 100px;
+        }
+
+        /* Add this media query to handle styling on smaller screens */
+        @media screen and (max-width: 782px) {
+            .top_container {
+                padding: 10px 20px; /* Adjust padding for smaller screens */
+            }
+        }
+
+        
+
+
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 50px;
+        }
+        
+        .navTitle{
+            color: red;
+            text-align: center;
+        }
+
+        .navList{
+            display: flex;
+            gap: 30px;
+            width: 90%;
+        }
+
+        .navList li{
+            list-style: none;
+            width: 30%;
+            padding: 10px 10px;
+            text-align: center;
+            background-color: darkgreen;
+        }
+
+        .navList li a{
+            font-size: 80%;
+            color: white;
+            text-decoration: none;
+        }
+
+        .profileInfo{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .profileInfo a{
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+
+        .profileInfo p{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .fa-user-circle{
+            color: white;
+            font-size: 40px;
+        }
+
+        .current_username{
+            font-size: 18px;
+        }
+        
+        .mobileTopBar{
+            display: none;
+        }
+
+        .close_Side_Nav{
+            display: none;
+        }
+
+        .content{
+            max-width: 1000px;
+        }
+        @media screen and (max-width: 782px) {
+            .app_top_nav{
+                display: block;
+            }
+            .mobileTopBar{
+                display: flex;
+                background-color: darkblue;
+                padding: 10px 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid var(--bg-border);
+                align-items: center;
+                gap: 5px;
+                justify-content: space-between;
+            }
+
+            .mobileTopBar div{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                color: white;
+
+            }
+            .mobileTopBar .fa-bars{
+                font-size: 30px;
+            }
+
+            .TopBarNavTitle{
+                font-size: 22px;
+            }
+
+            .close_Side_Nav{
+                display: block;
+            }
+
+            .user_profile_view_windows{
+                display: none;
+            }
+
+            nav{
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 0;
+                width: 0;
+                height: 100vh;
+                /* box-shadow: 4px 10px 4px 4px gray; */
+                background-color: darkblue;
+                box-shadow: none;
+                overflow: hidden;
+                z-index: 1000;
+                transition: 1s;
+            }
+            
+            .navTitle{
+                color: red;
+                font-size: 22px;
+                /* height: 50px; */
+                border-bottom: 1px solid var(--primary-color);
+                padding: 20px 20px;
+                
+            }
+
+            .navList{
+                display: block;
+                gap: 30px;
+            }
+
+            .navList li{
+                list-style: none;
+                width: 100px;
+                text-align: left;
+                padding:15px 20px;
+                border-bottom: 1px solid rgba(221, 221, 221, 0.4);
+                background-color: darkblue;
+                width: 100%;
+            }
+
+            .navList li a{
+                color: white;
+                font-size: 18px;
+            }
+
+            .profileInfo{
+                display: flex;
+                gap: 10px;
+            }
+            .profileInfo a{
+                display: block;
+                background-color: transparent;
+                padding: 10px 20px;
+                border-radius: 30px;
+                color: white;
+                text-decoration: none;
+            }
+
+            .profileInfo .current_username{
+                display: flex;
+                position: absolute;
+                bottom: 10%;
+                border-top: 1px solid rgba(221, 221, 221, 0.4);
+                padding: 20px 0;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .close_Side_Nav{
+                position: absolute;
+                left: 90%;
+                top: 3%;
+            }
+
+            /* .profileInfo a:last-child{
+                display: none;
+            } */
+
+
+        }
+      
+       .navList .active{
+          background-color: gray;
+
+        }
+        .active .navLink{
+          color: white;
+        }
+        .close_Side_Nav{
+          display: none;
+        }
+
+                /* Add this style to the existing style */
+        body {
+            margin: 0; /* Reset default body margin */
+        }
+
+        /* Add this style to the existing style */
+        .content {
+            padding-top: 20px; /* Adjust padding as needed */
+            padding-bottom: 50px;
+        }
+
+                /* Add this style to your existing CSS styles */
+        .navItems.active {
+            background-color: gray;
+        }
+
+        /* Add this style to your existing CSS styles if you want to change the color of the text when active */
+        .navItems.active .navLink {
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header ">
+            
+            <div class="mobileTopBar">
+                
+                <div>
+                    <p>
+                        <i class="fa fa-bars open_Side_Nav"></i>
+                    </p>
+                    <h1 class="TopBarNavTitle">VARK</h1>
+                </div>
+
+                <div>
+                    <a href="{{url_for ('user_profile')}}">
+
+                        <i class="fa fa-user-circle"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="top_container">
+              <div class="d app_top_nav">
+                <p></p>
+                  <h1 class="navTitle text-center">FlexLearning-MCDM</h1>
+                  {% if current_user.is_authenticated  %}
+                        <p class="user_profile_view_windows">
+
+                            <a href="{{ url_for('user_profile') }}">
+                                <i class="fa fa-user-circle" style="color: black; font-size: 30px;"></i> 
+                                {{current_user.name}}
+                                <a href="{{url_for('logout')}}" class="btn mx-4" style="border: 1px solid gray; background-color: green; color: white;"> Logout</a>
+                            </a>
+                        </p>
+                {% else %}
+                    <a href="{{url_for('login')}}" class="btn mx-4" style="border: 1px solid gray; background-color: green; color: white;">Log In</a>
+                {% endif %}
+  
+  
+              </div>
+              <nav class="Nav">   
+                  <i class="fa close_Side_Nav close_Side_Nav"></i>
+                  <ul class="navList">
+                      <li class="navItems active"><a href="{{ url_for ('home')}}" class="navLink">Home</a></li>
+                      <li class="navItems"><a href="{{ url_for('vark_questionnaire', question_number=1) }}" class="navLink">VARK Questionnaire</a></li>
+                      <li class="navItems"><a href="{{url_for('topics')}}" class="navLink">List of Topics</a></li>
+                      <li class="navItems"><a href="{{url_for('Pre_Test_Quiz', question_number=1)}}" class="navLink">Pre-Test</a></li>
+                      <li class="navItems"><a href="{{url_for('recommendations')}}" class="navLink">Recommended Materials</a></li>
+                      <li class="navItems"><a href="{{url_for('Post_Test_Quiz', question_number=1)}}" class="navLink">Post-Test</a></li>
+                  </ul>
+              </nav>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <div class="d-flex justify-content-center pt-2" style="background-color: rgb(221, 221, 221);">
+        <!-- Page Content -->
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+    </div>
+
+
+<footer class="footer py-5 text-center">
+    <div class="container">
+        <span class="text-muted">FlexLearning-MCDM&copy; 2023. All rights reserved.</span>
+    </div>
+</footer>
+
+
+    <!-- Bootstrap JS (Add the appropriate CDN link or include Bootstrap locally) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        document.querySelector('.close_Side_Nav').addEventListener("click", function(){
+            sideNav = document.querySelector(".Nav");
+            sideNav.style.width = 0;
+            sideNav.style.boxShadow = "none";
+        });
+
+        document.querySelector('.open_Side_Nav').addEventListener("click", function(){
+            sideNav = document.querySelector(".Nav");
+            sideNav.style.width = "80%";
+            sideNav.style.boxShadow = "4px 10px 4px 4px gray";
+        });
+
+        
+    </script>
+    <!-- Add this script at the end of your body tag -->
+    <script>
+        $(document).ready(function () {
+            $(".navItems").click(function () {
+                $(".navItems").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

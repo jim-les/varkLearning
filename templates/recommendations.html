@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+
+{% block title %}Recommended Materials - Your App{% endblock %}
+
+{% block content %}
+
+<style>
+    .custom-card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0 10px 20px rgba(21, 22, 21, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .custom-card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00bfff; /* Light Blue */
+    }
+
+    .card-text {
+        color: #ddd; /* Light Gray */
+    }
+
+    .btn-primary {
+        background-color: #ff4500; /* Orange Red */
+        color: #fff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff6347; /* Tomato */
+    }
+
+    .recommendation-section {
+        margin-top: 20px;
+    }
+
+    .recommendation-card {
+        /* Customize card styles as needed */
+    }
+</style>
+
+<div class="container">
+    <h2 class="my-4">Recommended Materials</h2>
+    {% if dominant_learning_style == "R" or dominant_learning_style == "K" %}
+    <div class="card custom-card" style="background-image: url({{ url_for('static', filename='Images/download.jpeg') }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="card-body">
+            <h3 class="card-title">Download Recommended Materials PowerPoint</h3>
+            <p class="card-text">Click the button below to download the recommended materials as a PowerPoint presentation.</p>
+
+            <a href="{{ url_for('static', filename='files/memory.pptx') }}" download="20231205170208memory.pptx" class="btn btn-primary btn-download">
+                Download PowerPoint
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-success w-100 my-5 p-2 text-light">
+        {% if dominant_learning_style == "R" %}
+            <h1>Read/Write Recommendation Materials</h1>
+        {% elif dominant_learning_style == "K" %}
+            <h1>Kinesthetic Recommendation Materials</h1>
+        {% endif %}
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="col-md-12 mb-4">
+            <h1>1</h1>
+            <div class="card custom-card bg-dark" style="background-image: url({{ url_for('static', filename='Images/hardware.jpeg') }}); background-repeat: no-repeat; background-size: cover; height: 300px">
+                <div class="card-body">
+                    <h5 class="card-title">hardware Read/Write </h5>
+            
+                    <!-- YouTube Video Embed -->
+                    <div class="">
+                        <!-- <img src="{{ url_for('static', filename='Images/hardware.jpeg') }}" alt="" class="w-100"> -->
+                    </div>
+            
+                    <!-- Play Button (Optional) -->
+                    <a href="{{url_for('hardware_page')}}" class="btn btn-primary mt-3">
+                        View 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <h1>2</h1>
+            <div class="card custom-card bg-dark" style="background-image: url({{ url_for('static', filename='Images/software.jpeg') }}); background-repeat: no-repeat; background-size: cover; height: 300px"> 
+                <div class="card-body">
+                    <h5 class="card-title">Software Read/Write </h5>
+            
+                    <!-- YouTube Video Embed -->
+                    <div class="">
+                        <!-- <img src="{{ url_for('static', filename='Images/software.jpeg') }}" alt="" class="w-100"> -->
+                    </div>
+            
+                    <!-- Play Button (Optional) -->
+                    <a href="{{url_for('software_page')}}" class="btn btn-primary mt-3">
+                        View 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <h1>3</h1>
+
+            <div class="card custom-card bg-dark"  style="background-image: url({{ url_for('static', filename='Images/memory.jpeg') }}); background-repeat: no-repeat; background-size: cover; height: 300px">
+                <div class="card-body">
+                    <h5 class="card-title">Memory Read/Write </h5>
+            
+                    <!-- YouTube Video Embed -->
+                    <div class="">
+                        <!-- <img src="{{ url_for('static', filename='Images/memory.jpeg') }}" alt="" class="w-100"> -->
+                    </div>
+            
+                    <!-- Play Button (Optional) -->
+                    <a href="{{url_for('read_memory_page')}}" class="btn btn-primary mt-3">
+                        View 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <h1>4</h1>
+
+            <div class="card custom-card bg-dark"  style="background-image: url({{ url_for('static', filename='Images/ports.jpeg') }}); background-repeat: no-repeat; background-size: cover; height: 300px">
+                <div class="card-body">
+                    <h5 class="card-title">Port Read/Write </h5>
+            
+                    <!-- YouTube Video Embed -->
+                    <div class="">
+                        <!-- <img src="{{ url_for('static', filename='Images/ports.jpeg') }}" alt="" class="w-100"> -->
+                    </div>
+            
+                    <!-- Play Button (Optional) -->
+                    <a href="{{url_for('ports_page')}}" class="btn btn-primary mt-3">
+                        View 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <br>
+
+    {% elif dominant_learning_style == "A" %}
+    <!-- Audio Recommendations Section -->
+    <div class="recommendation-section">
+        <h3>Audio Recommendations</h3>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">1</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">hardware Audio </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">2</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Software Audio </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">3</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">memory Audio </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">4</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ports Audio </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+
+    {% elif dominant_learning_style == "V" %}
+    <!-- Audio Recommendations Section -->
+    <div class="recommendation-section">
+        <h3>Video Recommendations</h3>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">1</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">hardware Video </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">1</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Software Video </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">1</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">memory Video </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mb-4">
+            <h1 class="numbering">1</h1>
+
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ports Video </h5>
+                
+                        <!-- YouTube Video Embed -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://youtube/lut1FvW7zU0?list=PL0JZB-buuP3mgBuqTvN4kIWlCCL_1kozQ" allowfullscreen></iframe>
+                        </div>
+                
+                        <!-- Play Button (Optional) -->
+                        <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#videoModal">
+                            Play Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

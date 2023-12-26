@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Add any additional stylesheets or meta tags as needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .user-info {
+            margin-top: 30px;
+        }
+        .user-info p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-tab bg-dark py-5 text-light">
+        <h1>Admin Dashboard</h1>
+    </nav>
+    <div class="container">
+       
+        <div class="user-info">
+            <p><strong>Name:</strong> {{ current_user.name }}</p>
+            <p><strong>Email:</strong> {{ current_user.email }}</p>
+            <p><strong>Role:</strong> {{ "Admin" if current_user.is_admin else "User" }}</p>
+        </div>
+        <!-- Add additional content as needed -->
+
+        <div class="nav">
+            <a href="{{ url_for('admin_dashboard') }}" class="bg-primary text-light px-5">Dashboard</a>
+            <a href="{{ url_for('view_users') }}" class="bg-primary text-light px-5 mx-5">View Users</a>
+            <!-- Add more navigation links as needed -->
+        </div>
+    </div>
+
+
+    <!-- Add Bootstrap JS and Popper.js links -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Add xlsx library for Excel export -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+</body>
+</html>

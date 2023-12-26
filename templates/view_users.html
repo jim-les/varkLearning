@@ -1,0 +1,124 @@
+<!-- admin/view_users.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Add any additional stylesheets or meta tags as needed -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+        .container-fluid {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ced4da;
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-tab bg-dark py-5">
+        <h1 class="text-center">Admin FlexLerning-MCDM</h1>
+
+    </nav>
+    <div class="container-fluid mx-2">
+        <h1>View Users</h1>
+        <!-- Add Bootstrap Table component -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Major</th>
+                    <th>Student ID</th>
+                    <th>Pre-test Knowledge Gap</th>
+                    <th>Post-test Knowledge Gap</th>
+                    <th>Dominant VARK Style</th>
+                    <th>Style First</th>
+                    <th>Style Second</th>
+                    <th>Style Third</th>
+                    <th>Style Fourth</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.major }}</td>
+                        <td>{{ user.student_id }}</td>
+                        <td>{{ user.pre_test_knowledge_gap }}</td>
+                        <td>{{ user.post_test_knowledge_gap }}</td>
+                        <td>{{ user.dominant_vark_style }}</td>
+                        <td>{{ user.style_first }}</td>
+                        <td>{{ user.style_second }}</td>
+                        <td>{{ user.style_third }}</td>
+                        <td>{{ user.style_fourth }}</td>
+                        <!-- Add more cells as needed -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- <button class="btn btn- mt-3  text-center" onclick="downloadExcel()">Download Excel</button> -->
+        <a href="{{url_for('download_excel')}}" class="btn bg-primary text-light">Download the Data to excell</a>
+
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js links -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Add xlsx library for Excel export -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <script>
+        function downloadExcel() {
+            const table = document.getElementById('userTable');
+            const ws = XLSX.utils.table_to_sheet(table);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Users');
+            XLSX.writeFile(wb, 'users.xlsx');
+        }
+    </script>
+</body>
+</html>

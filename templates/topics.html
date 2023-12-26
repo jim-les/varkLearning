@@ -1,0 +1,77 @@
+<!-- topics.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Topics - Your App{% endblock %}
+
+{% block content %}
+
+<style>
+    .fade-in {
+        opacity: 0;
+        animation: fadeInAnimation 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeInAnimation {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .custom-list-item {
+        background-color: #f8f9fa; /* Light gray background */
+        color: #495057; /* Dark gray text color */
+        border: 1px solid #dee2e6; /* Light border color */
+        border-radius: 0.25rem;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .custom-list-item:hover {
+        background-color: #e2e6ea; /* Lighter gray on hover */
+    }
+
+    .badge-primary {
+        background-color: #007bff; /* Blue badge background color */
+    }
+</style>
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">List of Topics</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item fade-in custom-list-item">
+            Software: Digital instructions enabling computer functionality and task execution.
+            <span class="badge badge-primary badge-pill ml-2">New</span>
+        </li>
+
+        <li class="list-group-item fade-in custom-list-item">
+            Hardware: Physical machinery forming a computer system for processing tasks.
+            <span class="badge badge-primary badge-pill ml-2">New</span>
+        </li>
+
+        <li class="list-group-item fade-in custom-list-item">
+            Memory: Storage facilitating temporary or permanent data retention in computers.
+            <span class="badge badge-primary badge-pill ml-2">New</span>
+        </li>
+
+        <li class="list-group-item fade-in custom-list-item">
+            Ports: External/Internal interfaces connecting devices for seamless data transfer.
+            <span class="badge badge-primary badge-pill ml-2">New</span>
+        </li>
+<!-- 
+        {% for topic in topics %}
+            <li class="list-group-item fade-in custom-list-item">
+                {{ topic }}
+                <span class="badge badge-primary badge-pill ml-2">New</span>
+            </li>
+        {% endfor %} -->
+    </ul>
+</div>
+
+{% endblock %}

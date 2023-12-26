@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="signup_form" style="background-image: url({{ url_for('static', filename='Images/bg2.jpeg') }});">
+
+        <div class="signup_card">
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li style="color: {% if 'danger' in message %}red{% else %}green{% endif %};">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form method="post">
+                <div style="height: fit-content; width: 100%;">
+                    <h1 style="text-align: center; color: rgb(30, 241, 241);">Create your Account</h1>
+                    <p style="text-align: center;">
+                        Note that all this website will always protect you personal data
+                        Your Contribution to this website throught data will not go un noticed.
+                    </p>
+                </div>
+
+                <div style="display: none;">
+                    <!-- email -->
+                        <div>
+                            <!-- <label for="email" class="SignupEmailInput">Email:</label> -->
+                            <input type="email" name="email" required placeholder="Email" value="{{Email}}"><br>
+                        </div>
+
+                        <!-- username -->
+                        <div>
+                            <input type="text" name="username" required placeholder="Student Name" value="{{Name}}"><br>
+                        </div>
+
+                         <!-- Major -->
+                        <div>
+                            <input type="text" name="major" required placeholder="Major" value="{{Major}}"><br>
+                        </div>
+                        
+                        <!-- age -->
+                        <div>
+                            <input type="text" name="student_id" required placeholder="Student ID" value="{{Student_ID}}"><br>
+                        </div>
+
+                        <input type="text" name="gender" value="{{Gender}}">
+
+                        <div>
+                            <input type="text" name="age" required placeholder="Age" value="{{Age}}"><br>
+                        </div>
+
+                </div>
+                
+                <!-- password -->
+                <div>
+                    <input type="text" name="password" required placeholder="Password"><br>
+                </div>
+
+                 <!-- age -->
+                 <div>
+                    <input type="text" name="password_2" required placeholder="Confirm Password"><br>
+                </div>
+
+              
+                <div>
+                    <input type="submit" value="Sign up" name="action">
+                </div>
+
+                <p style="text-align: center;">Already have an account? <a href="{{ url_for('login') }}" style="color: rgb(30, 241, 241);">Log in</a></p>
+            </form>
+        </div>
+        <p style="align-items: center; position: absolute; bottom: -50px; color: white; text-decoration: none;"><a href="#" style="color: rgb(30, 241, 241)">Terms && Conditions</a></p>
+    </div>
+    
+</body>
+</html>

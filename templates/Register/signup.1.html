@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="signup_form" style="background-image: url({{ url_for('static', filename='Images/bg2.jpeg') }});">
+
+        <div class="signup_card">
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li class="p-3" style="color: {% if 'danger' in message %}red{% else %}white{% endif %};list-style: none; text-align: center; background-color: white;">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form method="post">
+           
+                <div style="height: fit-content; width: 100%;">
+                    <h1 style="text-align: center; color: rgb(30, 241, 241);">Create your Account</h1>
+                    <p style="text-align: center;">
+                        Note that this website will always protect you personal data
+                        Your Contribution to this website throught data will not go un noticed.
+                    </p>
+                </div>
+    
+                
+                <!-- email -->
+                <div>
+                    <!-- <label for="email" class="SignupEmailInput">Email:</label> -->
+                    <input type="email" name="email" required placeholder="Email"><br>
+                </div>
+
+                <div>
+                    <input type="submit" value="Continue" name="action">
+                </div>
+
+                <div class="or" style="height: 60px;">or</div>
+                
+                <div style="position: relative; height: 50px;">
+                    <a href="#" class="continueWithGoogle">Continue with Google </a>
+                    <img src="{{ url_for('static', filename='Images/google.png') }}" alt="" id="googleIcon">
+                </div>
+                
+                
+                
+                <p style="text-align: center;">Already have an account? <a href="{{ url_for('login') }}" style="color: rgb(30, 241, 241);">Log in</a></p>
+            </form>
+        </div>
+        <p style="align-items: center; position: absolute; bottom: -50px; color: white; text-decoration: none;"><a href="#" style="color: rgb(30, 241, 241);">Terms && Conditions</a></p>
+    </div>
+    
+</body>
+</html>

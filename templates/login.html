@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="login_form" style="background-image: url({{ url_for('static', filename='Images/bg1.jpeg') }});">
+        <div class="login_card">
+            <form action="" method="post">
+                <br><br><br>
+               
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li style="color: {% if 'danger' in message %}red{% else %}green{% endif %}; text-align: center; list-style: none;">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <div>
+                    <h2 style="color: rgb(30, 241, 241)">Log in</h2>
+                </div>
+                <div style="height: 70px;">
+                    <i class="fa fa-user iconsLeft" style="font-size: 1.8rem;"></i>
+                    <input type="text" name="username" id="username" class="username username-focused"  placeholder=" " required>
+                    <label for="username">email</label>
+                    
+                </div>
+    
+                <div style="height: 70px;">
+                    <i class="fa fa-lock iconsLeft" style="font-size: 1.8rem;"></i>
+                    <input type="password" name="password" id="password" class="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                    <i class="fa fa-eye iconRight" style="font-size: 1.8rem;"></i>
+                </div>
+
+                <div class="forgotPassword">
+                    <a href="#" >Forgot your password?</a>
+                </div>
+
+                <div class="">
+                    <input type="submit" value="Log in">
+                </div>
+                <div class="or" style="height: 50px;">or</div>
+
+                <div style="position: relative;;">
+                    <a href="#" class="continueWithGoogle">Continue with Google </a>
+                    <img src="{{ url_for('static', filename='Images/google.png') }}" alt="" id="googleIcon">
+                </div>
+
+                <div class="">
+                    <a type="button" value="Sign up" href="{{ url_for ('register') }}" class="signup">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- script -->
+    <script>
+        document.getElementById('username').addEventListener('input', function() {
+            // Check if the username input has a value
+            if (this.value.trim() !== '') {
+                // Add a class to change the background color when the username has been entered
+                this.classList.add('username-focused');
+            } else {
+                // Remove the class if the input is empty
+                this.classList.remove('username-focused');
+            }
+        });
+
+        document.querySelector('.iconRight').addEventListener('click', function() {
+            pwdInput = document.querySelector('.password');
+            eyeIcon = document.querySelector('.iconRight')
+            pwdInput.type = (pwdInput.type === 'password') ? 'text' : 'password';
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+    </script>
+</body>
+</html>
+
