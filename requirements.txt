@@ -3,4 +3,4 @@ Flask-Login
 SQLAlchemy
 pandas
 scipy
-MySQL-python
+MySQL-python 2.2.2
