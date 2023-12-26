@@ -7,4 +7,4 @@ def under_development():
     return render_template('under_development.html')
 
 if __name__ == '__main__':
-    app.run(debug=False,host='varklearning-frt6-main.zeet-jim-les-team.zeet.app')
+    app.run(debug=True, host='0.0.0.0')
